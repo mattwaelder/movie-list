@@ -41,12 +41,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="add_movie_container">
-          <AddMovie catalogMovie = {this.catalogMovie} />
+      <div>
+        <div className="wrapper">
+          <div className="add_movie_container">
+            <AddMovie catalogMovie = {this.catalogMovie} />
+          </div>
+          <div className="search_movies_container">
+            <Search movies = {this.state.movies}/>
+          </div>
         </div>
-        <div className="search_movies_container">
-          <Search movies = {this.state.movies}/>
+        <div>
+            <MovieList />
         </div>
       </div>
     )

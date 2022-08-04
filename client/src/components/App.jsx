@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
 
     this.catalogMovie = this.catalogMovie.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
 
     this.state = {
        movies:
@@ -24,6 +25,16 @@ class App extends React.Component {
     }
     console.warn('INIT STATE', this.state)
   }
+
+
+  handleSearch(e) {
+    e.preventDefault;
+    let userQuery = e.target.search.val;
+
+
+  }
+
+
 
   catalogMovie (e) {
     e.preventDefault();
@@ -47,7 +58,7 @@ class App extends React.Component {
             <AddMovie catalogMovie = {this.catalogMovie} />
           </div>
           <div className="search_movies_container">
-            <Search movies = {this.state.movies}/>
+            <Search handleSearch={this.handleSearch}/>
           </div>
         </div>
         <div>

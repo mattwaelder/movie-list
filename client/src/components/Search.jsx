@@ -45,6 +45,10 @@ class Search extends React.Component {
                   //so im using a fn from props, calling a property of this modules state to do that filter
                   //the issue is that if i were to update the state of this module that is async
                   //so updating the state then calling the filter fn wouldnt be good right?
+
+                  //why again is this stateful?
+                  //considering we want the full movie list to render by default, it then seems unlikely
+                  //than using a second filtered list of movies is the play -- as with my first attempt
   render() {
     return(
 

@@ -22,15 +22,40 @@ class App extends React.Component {
         {title: 'Ex Machina'},
         {title: 'SunShine'},
       ],
+      filteredMovies: [
+
+      ]
     }
     console.warn('INIT STATE', this.state)
   }
 
 
-  handleSearch(e) {
-    e.preventDefault;
-    let userQuery = e.target.search.val;
+    //   this.props.movies.map(function(movie) {
+  //     if (movie.title.toLowerCase().includes(userInput.toLowerCase())) {
+  //       filteredMovieList.push(movie);
 
+  handleSearch(e) {
+    e.preventDefault();
+    let userQuery = e.target.search.val;
+    let tempList = [];
+    let stateCopy = this.state;
+
+    //the issue is getting the info (search input)
+    //can i pass state into handleSearch? state async?
+    console.log(userQuery)
+
+    stateCopy.movies.map(function(movie) {
+      if(movie.title.toLowerCase().includes(userQuery.toLowerCase())) {
+        tempList.push(movie);
+      }
+    })
+
+    console.log(tempList)
+    //ASYNC!
+    this.setState({
+      movies: stateCopy.movies,
+      filteredMovies: tempList,
+    })
 
   }
 
@@ -46,7 +71,7 @@ class App extends React.Component {
     // document.getElementById('form_add_movie').value = ''
     // e.target.name.value = '';
 
-    console.warn('NEW STATE', this.state)
+    // console.warn('NEW STATE', this.state)
   }
 
 
@@ -58,11 +83,14 @@ class App extends React.Component {
             <AddMovie catalogMovie = {this.catalogMovie} />
           </div>
           <div className="search_movies_container">
-            <Search handleSearch={this.handleSearch}/>
+            <Search handleSearch = {this.handleSearch}/>
           </div>
         </div>
-        <div>
-            <MovieList />
+        <div className="movie_list_container">
+            <MovieList
+              allMovies = {this.state.movies}
+              filteredMovies = {this.state.filteredMovies}
+            />
         </div>
       </div>
     )

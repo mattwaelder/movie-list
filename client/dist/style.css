@@ -22,11 +22,16 @@ button {
   padding: 0.2em;
 }
 
+.movie_list_container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
 .movie_list {
-  display: absolute;
   width: 10vw;
   height: auto;
-  left: 45vw;
+  text-align: center;
 }
 
 .movie_title {

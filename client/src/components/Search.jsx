@@ -5,6 +5,7 @@ import React from 'react';
 class Search extends React.Component {
   constructor(props) {
     super(props);
+    // let updateState = this.updateState.bind(this);
     // let handleSearch = this.handleSearch.bind(this)
     this.state = {
       query: "",
@@ -49,6 +50,12 @@ class Search extends React.Component {
                   //why again is this stateful?
                   //considering we want the full movie list to render by default, it then seems unlikely
                   //than using a second filtered list of movies is the play -- as with my first attempt
+
+  // updateState(e) {
+  //   this.setState({query: e.target.search.value})
+  //   console.log(this.state)
+  // }
+
   render() {
     return(
 
@@ -56,7 +63,10 @@ class Search extends React.Component {
 
         <form
         className='form_search'
-        onSubmit={(e) => this.props.handleSearch(e)}
+        onSubmit={(e) => {
+          // this.updateState(e)
+          this.props.handleSearch(e)}
+        }
         >
           <input type="text" id="form_movie_search" name="search" placeholder='Search for A Movie'>
           </input>

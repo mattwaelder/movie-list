@@ -36,10 +36,10 @@ class App extends React.Component {
 
   handleSearch(e) {
     e.preventDefault();
-    let userQuery = e.target.search.val;
+    let userQuery = e.target.search.value;
     let tempList = [];
     let stateCopy = this.state;
-
+    console.log(e)
     //the issue is getting the info (search input)
     //can i pass state into handleSearch? state async?
     console.log(userQuery)

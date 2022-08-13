@@ -16,7 +16,7 @@ function MovieList (props) {
 
   // console.log(movieXML)
 
-  console.warn('MOVIELISTPROPS', props)
+  // console.warn('MOVIELISTPROPS', props)
 
   let moviesToRender = [];
 

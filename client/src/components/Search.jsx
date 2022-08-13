@@ -10,51 +10,10 @@ class Search extends React.Component {
     this.state = {
       query: "",
     }
-    // console.warn('SEARCH PROPS', props)
-    // console.log(this.state.filteredList)
-    // this.handleSearch()
   }
 
-
-  // handleSearch(e) {
-  //   e.preventDefault();
-
-  //   // let userInput = document.getElementById('form_movie_search').value;
-  //   //"search" being the value of the name attr of e.target
-  //   let userInput = e.target.search.value || '';
-  //   let filteredMovieList = [];
-
-  //   // ! this is ASYNC !
-  //   this.setState({query: {userInput}})
-  //   let movieMatches = 0;
-
-  //   this.props.movies.map(function(movie) {
-  //     if (movie.title.toLowerCase().includes(userInput.toLowerCase())) {
-  //       filteredMovieList.push(movie);
-  //       movieMatches++;
-  //     }
-  //   })
-
-    // if (movieMatches===0) {
-    //   alert("Sorry, It Looks Like We Don't Have That Movie :(")
-    // }
-
-  //   this.setState({filteredList: {filteredMovieList}})
-
-  // }
-                  //the issue im having is that id like to use the state of this module to filter
-                  //so im using a fn from props, calling a property of this modules state to do that filter
-                  //the issue is that if i were to update the state of this module that is async
-                  //so updating the state then calling the filter fn wouldnt be good right?
-
-                  //why again is this stateful?
-                  //considering we want the full movie list to render by default, it then seems unlikely
-                  //than using a second filtered list of movies is the play -- as with my first attempt
-
-  // updateState(e) {
-  //   this.setState({query: e.target.search.value})
-  //   console.log(this.state)
-  // }
+  //i may need to change this such that state is updated, and on change
+  //the callback to edit app state is called...?
 
   render() {
     return(
@@ -74,10 +33,6 @@ class Search extends React.Component {
           <button type="submit">Search!
           </button>
         </form>
-{/*
-        <div className='movie_list'>
-          <MovieList plsRender={this.state.filteredList}/>
-        </div> */}
 
       </div>
     )

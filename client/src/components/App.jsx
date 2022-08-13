@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios'
+
 import Search from './Search.jsx';
 import MovieList from './MovieList.jsx';
 import MovieElement from './MovieElement.jsx'
@@ -26,7 +28,7 @@ class App extends React.Component {
 
       ]
     }
-    console.warn('INIT STATE', this.state)
+    // console.warn('INIT STATE', this.state)
   }
 
 
@@ -39,10 +41,10 @@ class App extends React.Component {
     let userQuery = e.target.search.value;
     let tempList = [];
     let stateCopy = this.state;
-    console.log(e)
+    // console.log(e)
     //the issue is getting the info (search input)
     //can i pass state into handleSearch? state async?
-    console.log(userQuery)
+    // console.log(userQuery)
 
     stateCopy.movies.map(function(movie) {
       if(movie.title.toLowerCase().includes(userQuery.toLowerCase())) {
@@ -59,19 +61,33 @@ class App extends React.Component {
 
   }
 
-
+/*
+axios.post('/user', {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+*/
 
   catalogMovie (e) {
     e.preventDefault();
     let newMovie = {title: e.target.add.value}
     let stateCopy = this.state;
+
+    //make post call to server with newMovie
+    //after successful post, make get call.
+
+    axios.post('/movies', newMovie)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+
     stateCopy.movies.push(newMovie)
     this.setState({stateCopy})
-
-    // document.getElementById('form_add_movie').value = ''
-    // e.target.name.value = '';
-
-    // console.warn('NEW STATE', this.state)
   }
 
 

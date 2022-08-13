@@ -6,7 +6,8 @@ USE moviesdb;
 
 CREATE TABLE movies (
   id INTEGER PRIMARY KEY auto_increment,
-  title VARCHAR(50)
+  title VARCHAR(50),
+  watched tinyint(1)
 );
 
 

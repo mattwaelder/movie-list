@@ -19,7 +19,8 @@ module.exports = {
   },
 
   search: function(req, res) {
-    console.log('received', req.method, 'data', req.body)
+    console.log('CONTROLLER REQ', req.body)
+    console.log('received', req.method, 'data:', req.body)
     model.search(req.body, (err, data) => {
       err ? console.log(err) : res.send(data);
     })

@@ -38,27 +38,28 @@ class App extends React.Component {
 
   handleSearch(e) {
     e.preventDefault();
-    let userQuery = {title: e.target.search.value};
+    let userQuery = e.target.search.value;
     let tempList = [];
     let stateCopy = this.state;
 
-    // {'water'}
-    axios.get('/moviesdb/search', userQuery)
-    .then((res) => console.warn(res))
-    .catch((err) => console.log(err))
+    // this is kind of a compromise, i am not filtering from the db exactly...
+    axios.get('/moviesdb/movies')
+    .then((res) => {
+      stateCopy.movies.map(function(movie) {
+        if(movie.title.toLowerCase().includes(userQuery.toLowerCase())) {
+          tempList.push(movie);
+        }
+      })
+      this.setState({
+        movies: stateCopy.movies,
+        filteredMovies: tempList,
+      })
+    })
+  .catch((err) => console.log(err))
 
-    // stateCopy.movies.map(function(movie) {
-    //   if(movie.title.toLowerCase().includes(userQuery.toLowerCase())) {
-    //     tempList.push(movie);
-    //   }
-    // })
 
     // console.log(tempList)
     // //ASYNC!
-    // this.setState({
-    //   movies: stateCopy.movies,
-    //   filteredMovies: tempList,
-    // })
 
   }
 
@@ -77,7 +78,10 @@ axios.post('/user', {
 
   catalogMovie (e) {
     e.preventDefault();
-    let newMovie = {title: e.target.add.value}
+    let newMovie = {
+      title: e.target.add.value,
+      watched: 0
+    }
     let stateCopy = this.state;
 
     //make post call to server with newMovie

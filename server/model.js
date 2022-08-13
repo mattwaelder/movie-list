@@ -18,7 +18,7 @@ module.exports = {
     console.log('////////////', data)
     db.connection.execute(
       "SELECT * FROM movies WHERE title LIKE '%?%';",
-      [data.title],
+      [data],
       (err, results, fields) => {
         console.log('ran query, returning:', results);
         err ? callback(err) : callback(null, results);

@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from './Search.jsx';
-import MovieElement from './MovieElement.jsx'
+import MovieElement from './MovieElement.jsx';
+import MovieElementWatched from './MovieElementWatched.jsx';
 
 function MovieList (props) {
   // let moviesToRender = [null];
@@ -23,19 +24,31 @@ function MovieList (props) {
   //if there search yields results
   if (props.filteredMovies.length) {
     moviesToRender = props.filteredMovies.map((movie) => {
-      return <MovieElement plsRender = {movie.title} />
+      let isWatched;
+      movie.watched ? isWatched = true : isWatched = false;
+      if (isWatched) {
+        return <MovieElementWatched plsRender = {movie.title} />
+      } else {
+        return <MovieElement plsRender = {movie.title} />
+      }
     })
   //if search does not yield results
   } else {
     moviesToRender = props.allMovies.map((movie) => {
-      return <MovieElement plsRender = {movie.title} />
+      let isWatched;
+      movie.watched ? isWatched = true : isWatched = false;
+      if (isWatched) {
+        return <MovieElementWatched plsRender = {movie.title} />
+      } else {
+        return <MovieElement plsRender = {movie.title} />
+      }
     })
   }
 
 
 
   return(
-    <div>
+    <div className="list_sub_container">
       {moviesToRender}
     </div>
   )

@@ -5,6 +5,8 @@ const router = require('express').Router();
 //controller.get if get is a method on exports obj in controller. what if exports individually not an obj?
 router.get('/movies', controller.get);
 
-router.post('/movies', controller.post);
+router.post('/addmovie', controller.post);
+
+router.get('/search', controller.search);
 
 module.exports = router;

@@ -15,21 +15,21 @@ class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
 
     this.state = {
-       movies:
-       [
-        {title: 'Mean Girls'},
-        {title: 'Hackers'},
-        {title: 'The Grey'},
-        {title: 'Sunshine'},
-        {title: 'Ex Machina'},
-        {title: 'SunShine'},
-      ],
-      filteredMovies: [
-
-      ]
+       movies: [],
+      filteredMovies: []
     }
     // console.warn('INIT STATE', this.state)
   }
+
+  componentDidMount() {
+    let stateCopy = this.state;
+    axios.get('/moviesdb/movies')
+    .then((res) => {
+      stateCopy.movies = res.data;
+      this.setState({stateCopy})
+    })
+    .catch((err) => console.log(err))
+  };
 
 
     //   this.props.movies.map(function(movie) {
@@ -38,26 +38,27 @@ class App extends React.Component {
 
   handleSearch(e) {
     e.preventDefault();
-    let userQuery = e.target.search.value;
+    let userQuery = {title: e.target.search.value};
     let tempList = [];
     let stateCopy = this.state;
-    // console.log(e)
-    //the issue is getting the info (search input)
-    //can i pass state into handleSearch? state async?
-    // console.log(userQuery)
 
-    stateCopy.movies.map(function(movie) {
-      if(movie.title.toLowerCase().includes(userQuery.toLowerCase())) {
-        tempList.push(movie);
-      }
-    })
+    // {'water'}
+    axios.get('/moviesdb/search', userQuery)
+    .then((res) => console.warn(res))
+    .catch((err) => console.log(err))
 
-    console.log(tempList)
-    //ASYNC!
-    this.setState({
-      movies: stateCopy.movies,
-      filteredMovies: tempList,
-    })
+    // stateCopy.movies.map(function(movie) {
+    //   if(movie.title.toLowerCase().includes(userQuery.toLowerCase())) {
+    //     tempList.push(movie);
+    //   }
+    // })
+
+    // console.log(tempList)
+    // //ASYNC!
+    // this.setState({
+    //   movies: stateCopy.movies,
+    //   filteredMovies: tempList,
+    // })
 
   }
 
@@ -82,12 +83,19 @@ axios.post('/user', {
     //make post call to server with newMovie
     //after successful post, make get call.
 
-    axios.post('/movies', newMovie)
-    .then((res) => console.log(res))
+    axios.post('/moviesdb/addmovie', newMovie)
+    .then((res) => {
+      console.log('added movie:', res);
+      axios.get('/moviesdb/movies')
+      .then((res) => {
+        stateCopy.movies = res.data;
+        this.setState({stateCopy})
+      })
+    })
     .catch((err) => console.log(err));
 
-    stateCopy.movies.push(newMovie)
-    this.setState({stateCopy})
+    // stateCopy.movies.push(newMovie)
+    // this.setState({stateCopy})
   }
 
 

@@ -8,7 +8,20 @@ module.exports = {
       "SELECT * FROM movies;",
       (err, results, fields) => {
         console.log('ran query, returning:', results);
-        err ? callback(err) : callback(null, results)
+        err ? callback(err) : callback(null, results);
+      }
+    )
+  },
+
+
+  search: (data, callback) => {
+    console.log('////////////', data)
+    db.connection.execute(
+      "SELECT * FROM movies WHERE title LIKE '%?%';",
+      [data.title],
+      (err, results, fields) => {
+        console.log('ran query, returning:', results);
+        err ? callback(err) : callback(null, results);
       }
     )
   },
@@ -21,10 +34,10 @@ module.exports = {
       [data.title],
       (err, results, fields) => {
         console.log('ran query, returning:', results);
-        err ? callback(err) : callback(null, results)
+        err ? callback(err) : callback(null, results);
       }
     )
-  }
+  },
 
 
 

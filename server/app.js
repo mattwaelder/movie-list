@@ -24,7 +24,8 @@ app.use(cors())
 app.use(express.json());
 
 //send movies reqeusts to router
-app.use('/movies', router);
+//endpoint will be localhost:3000/moviesdb/??? (probs movies)
+app.use('/moviesdb', router);
 
 //static assets
 app.use(express.static('client/dist'));

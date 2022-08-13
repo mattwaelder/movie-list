@@ -7,15 +7,15 @@ module.exports = {
   get: function(req, res) {
     console.log('received', req.method, 'data:', req.body)
     model.getAll((err, data) => {
-      if (err) {
-        console.log(err)
-      }
-      res.send(data);
+      err ? console.log(err) : res.send(data);
     })
   }, //its a method
 
   post: function(req, res) {
     console.log('received', req.method, 'data:', req.body)
+    model.create(req.body, (err, data) => {
+      err ? console.log(err) : res.send(data);
+    })
   },
 
 };
